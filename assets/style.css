@@ -1,0 +1,15 @@
+.col-xs-4 {
+	margin-left: 100px;
+}
+
+img {
+	height: 200px;
+	width: 200px;
+}
+
+h3 {
+	text-align: center;
+}
+body {
+	bacground:"https://s3.amazonaws.com/media.artslant.com/work/image/565880/slide/20120402180454-Bischoff_Bronson_Caves_14.jpg";
+}

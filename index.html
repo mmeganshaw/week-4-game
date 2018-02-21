@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gem Colector</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+<div class="jumbotron"><center>
+  <h1 class="display-4">Crystal Collector!</h1>
+  <p class="lead">You will be given a random number at the start of the game</p>
+  <p class="lead">There are four crystals below. By clicking on a crystal, you will add a specific amount of points to your total score.</p>
+  <p class="lead">You win the game by matching your total score to random number, you lose the game if your total score goes above the random number. </p>
+  <p class="lead">The value of each crystal is hidden from you until you click on it.</p>
+  <p class="lead">Each time when the game starts, the game will change the values of each crystal. </p>
+</center>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <h3 class="card-header">Total Score</h3>
+          <div class="card-body"></div>
+            <h3 id="total-score">0</h3>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card">
+          <h3 class="card-header">Gems</h3>
+          <div class="card-body">
+            <img id="heart-gem" src="assets/images/heart-gem.png" style="height:120px; width: 160px">
+            <img id="green-gem" src="assets/images/green-gem.png" style="height: 120px; width: 160px;">
+            <img id="red-gem" src="assets/images/red-gem.jpg" style="height: 120px; width: 140px;">
+            <img id="white-gem" src="assets/images/white-gem.jpg" style="height: 200px; width: 200px;">
+            <hr>
+            <h1 id="result"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+            <h2 class="card-header">Target Value</h2>
+          <div class="card-body">
+            <center><h2 id="target-value">0</h2></center>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <h3 class="card-header">Wins</h3>
+          <div class="card-body">
+            <center><h2 id="wins">0</h2></center>
+            <h1 id="result"></h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <h3 class="card-header">Losses</h3>
+          <div class="card-body">
+            <center><h2 id="losses">0</h2></center>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+<script>
+$(document).ready(function() {
+
+    var heartgem = Math.floor((Math.random() * 10) + 1);
+    var greengem = Math.floor((Math.random() * 10) + 1);
+    var redgem = Math.floor((Math.random() * 10) + 1);
+    var whitegem = Math.floor((Math.random() * 10) + 1);
+    var targetvalue = Math.floor((Math.random() * 60) + 40);
+    var totalscore = 0;
+    var wins = 0;
+    var losses = 0;
+
+
+    console.log(targetvalue);
+
+
+  $("#target-value").html(targetvalue);
+  $("#wins").html(wins);
+  $("#losses").html(losses);
+
+  function resolve () {
+    if(totalscore === targetvalue) {
+      wins++
+      alert("You have won!");
+      $("#wins").html(wins);
+      totalscore = 0;
+      $("#total-score").html(totalscore);
+      heartgem = Math.floor((Math.random() * 10) + 1);
+      greengem = Math.floor((Math.random() * 10) + 1);
+      redgem = Math.floor((Math.random() * 10) + 1);
+      whitegem = Math.floor((Math.random() * 10) + 1);
+      targetvalue = Math.floor((Math.random() * 60) + 40);
+      $("#target-value").html(targetvalue);
+    } else if (totalscore > targetvalue) {
+      losses++
+      $("#losses").html(losses);
+      alert("You have lost.");
+      totalscore = 0;
+      $("#total-score").html(totalscore);
+      heartgem = Math.floor((Math.random() * 10) + 1);
+      greengem = Math.floor((Math.random() * 10) + 1);
+      redgem = Math.floor((Math.random() * 10) + 1);
+      whitegem = Math.floor((Math.random() * 10) + 1);
+      targetvalue = Math.floor((Math.random() * 60) + 40);
+      $("#target-value").html(targetvalue);
+      }
+    }
+
+
+  $("#heart-gem").on("click", function() {
+        totalscore = totalscore + heartgem; 
+        console.log(totalscore);
+          $("#total-score").html(totalscore);
+        resolve();
+    });
+  
+  $("#green-gem").on("click", function() {
+        totalscore = totalscore + greengem; 
+        console.log(totalscore);
+          $("#total-score").html(totalscore);
+        resolve();
+    });
+
+  $("#red-gem").on("click", function() {
+        totalscore = totalscore + redgem; 
+        console.log(totalscore);
+          $("#total-score").html(totalscore);
+        resolve();
+    });
+
+  $("#white-gem").on("click", function() {
+        totalscore = totalscore + whitegem; 
+        console.log(totalscore);
+          $("#total-score").html(totalscore);
+        resolve();
+    });
+
+
+
+
+});
+
+
+</script>
+</html>
